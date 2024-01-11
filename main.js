@@ -1,6 +1,5 @@
 // Main Window
-const { app, BrowserWindow ,Notification} = require('electron');
-const path = require('node:path');
+const { app, BrowserWindow } = require('electron');
 
 const createWindow = () => {
     // Browser Window <- Renderer Process
@@ -8,7 +7,13 @@ const createWindow = () => {
         width: 1200,
         height: 800,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: false,
+            // will sanitize JS code
+            // TODO: explain when React application is initialize
+            worldSafeExecuteJavaScript: true,
+            // is a feature that ensures that both, your preload scripts and Electron
+            // internal logic run in separate context
+            contextIsolation: true
         }
     })
 
@@ -18,26 +23,17 @@ const createWindow = () => {
     win.webContents.openDevTools();
 }
 
-app.whenReady().then(() => {
-    createWindow();
-
-    const notification = new Notification({title: 'Hello World', body: 'My test message'});
-    notification.show();
-
-    const parsed = path.parse('/home/user/dir/file.txt');
-    console.log(parsed.base);
-    console.log(parsed.ext);
-
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    })
-})
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
+    }
+})
+
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
     }
 })
 
