@@ -11,7 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.23.7",
-    "electron": "^28.1.2"
+    "electron": "^28.1.2",
+    "electron-reload": "^2.0.0-alpha.1"
   },
   "dependencies": {
     "@babel/preset-env": "^7.23.8",

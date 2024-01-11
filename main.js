@@ -1,5 +1,7 @@
 // Main Window
 const { app, BrowserWindow } = require('electron');
+const path = require('node:path');
+const isDev = !app.isPackaged;
 
 const createWindow = () => {
     // Browser Window <- Renderer Process
@@ -20,7 +22,13 @@ const createWindow = () => {
     win.loadFile('index.html');
 
     // Open the DevTools initially (optional)
-    win.webContents.openDevTools();
+    isDev && win.webContents.openDevTools();
+}
+
+if (isDev) {
+    require('electron-reload')(__dirname, {
+        electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+    })
 }
 
 app.whenReady().then(createWindow);
