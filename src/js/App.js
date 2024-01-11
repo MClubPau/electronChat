@@ -5,8 +5,9 @@ export default function App() {
     const enhancedTitle = title + ' - React App!';
 
     const sendNotification = () => {
-        //ipcRenderer.send('notify', 'This is my custom message!');
-        window.sendNotification('My custom message');
+        electron
+            .notificationApi
+            .sendNotification('My custom message!');
     }
 
     return (
