@@ -1,5 +1,6 @@
 import React from "react";
 import HomeView from './views/Home';
+import ChatView from "./views/Chat";
 import SettingsView from "./views/Settings";
 import RegisterView from "./views/Register";
 import LoginView from "./views/Login";
@@ -18,10 +19,11 @@ export default function App() {
         <div className='content-wrapper'>
           <Navbar />
             <Routes>
-              <Route path="/" element={ <HomeView /> } />
-              <Route path="/settings" element={ <SettingsView /> }/>
-              <Route path="/login" element={ <LoginView /> }/>
-              <Route path="/register" element={ <RegisterView /> }/>
+              <Route path="/" element={<HomeView />} />
+              <Route path="/chat" element={<ChatView />}/>
+              <Route path="/settings" element={<SettingsView />}/>
+              <Route path="/login" element={<LoginView />}/>
+              <Route path="/register" element={<RegisterView />}/>
             </Routes>
           </div>
         </Router>
